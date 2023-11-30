@@ -9,6 +9,7 @@ import CellPhoneList from './components/devices/CellPhoneList';
 import SmartWatchList from './components/devices/SmartWatchList';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
+import Snowflakes from './Snowflakes';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="register" element={<Register />} />
       </Routes>
       <Footer />
+      <Snowflakes />
     </>
   )
 }
