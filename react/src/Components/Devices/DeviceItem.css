@@ -1,0 +1,88 @@
+
+  .device-container {
+    max-width: 78%; 
+    margin: 0 auto;
+    padding-bottom: 2em;
+    padding-top: 2em;
+    justify-content: space-evenly;
+  }
+  .my-card {
+    display: inline-flex;
+    width: 18rem;
+    margin: 1em;
+  }
+  
+  .my-card img {
+    transition: all 0.3s ease;
+  }
+  
+  
+  .middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .my-card:hover .middle {
+    opacity: 0.8;
+  }
+  .my-card:hover {
+    opacity: 1;
+    transform: scale(1.02);
+    background-color: rgb(130, 144, 144);
+
+  }
+  
+  .middle button {
+    background-color: #f1f1f1;
+    color: black;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  .card-text {
+    text-align: center;
+    font-style: italic;
+    /* font-weight: bold; */
+  }
+  .modal {
+    justify-content: center;
+  }
+  .modal-body {
+    font-family:'Times New Roman', Times, serif;
+    color: #333;
+    line-height: 1;
+    text-align: center;
+    text-transform:capitalize;
+    font-size: 1.5rem;
+
+  }
+  
+  .modal-body p {
+    margin-bottom: 1em;
+  }
+  
+  .modal-title {
+    font-size: 2em;
+    color: #444;
+    margin:  auto;
+  }
+  .modal-footer {
+    justify-content: center;
+  }
+  
+/* Media queries for responsiveness */
+
+@media (max-width: 768px) {
+  .product-card {
+    max-width: 100%; /* Allow cards to take full width on larger screens */
+  }
+  .product-card {
+    width: 95%;
+  }
+}
