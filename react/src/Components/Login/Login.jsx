@@ -7,7 +7,7 @@ export default function Login () {
   return (
     <Form className='form-container'>
       <Form.Group controlId="formBasicEmail">
-        <Form.Label>Email</Form.Label>
+        <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" />
       </Form.Group>
 

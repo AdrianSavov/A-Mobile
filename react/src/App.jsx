@@ -8,6 +8,7 @@ import SmartphoneList from "./components/devices/SmartphoneList";
 import CellPhoneList from './components/devices/CellPhoneList';
 import SmartWatchList from './components/devices/SmartWatchList';
 import Login from './Components/Login/Login';
+import Register from './Components/Register/Register';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="smartwatches" element={<SmartWatchList />} />
           <Route path="mobile-plans" element={<MobilePlans />} />
           <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
       </Routes>
       <Footer />
     </>

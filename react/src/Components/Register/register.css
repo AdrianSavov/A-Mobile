@@ -1,0 +1,15 @@
+.reg-form-container {
+    max-width: 20%;
+    margin: 0 auto;
+    justify-content: center;
+}
+.form-control {
+    text-align: center;
+}
+.reg-btn-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
