@@ -1,0 +1,16 @@
+.card-title {
+    text-align: center;
+    font-size: 3em;
+}
+.adv-container {
+    max-width: 95%; 
+    margin: 0 auto; 
+    position: relative;
+    padding-bottom: 2em;
+}
+
+@media (max-width: 500px) {
+    .card-title {
+        font-size: 0.8em;
+    }
+}
