@@ -1,0 +1,32 @@
+.devices-container {
+    max-width: 95%;
+    display: flex;
+    justify-content: space-evenly;
+    background-image: url('src/assets/christmas-4.png');
+    background-size: cover;
+    background-position: center;
+    margin: 0 auto;
+    border-radius: 7px;
+}
+.devices-container :hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+.card-item {
+    width: 18rem;
+    margin: 2em;
+}
+.card-item :hover {
+    transform:scale(1.0);
+}
+
+@media (max-width: 500px) {
+    .devices-container {
+        max-width: 95%;
+        flex-direction: column; 
+        align-items:center;
+    }
+    .card-item {
+        width: 15rem;
+    }
+}

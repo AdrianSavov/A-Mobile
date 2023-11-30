@@ -1,4 +1,5 @@
 import Carousel from './Carousel/Carousel';
+import Devices from './Devices/Devices';
 import Advertisement from './Аdvertisement/Аdvertisement';
 
 export default function Home () {
@@ -7,6 +8,7 @@ export default function Home () {
         <>
         <Carousel />
         <Advertisement />
+        <Devices />
         </>
     )
 }
