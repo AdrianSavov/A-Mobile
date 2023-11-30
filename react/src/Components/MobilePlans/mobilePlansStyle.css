@@ -1,0 +1,37 @@
+.plans-container {
+    display: flex;
+    max-width: 95%;
+    margin: 0 auto; 
+    padding-bottom: 2em;
+    padding-top: 2em;
+    justify-content: space-evenly;
+    border: solid black;
+    border-radius: 7px;
+}
+.list-group-flush {
+    text-align: center;
+}
+.plans-card :hover{
+    transform: scale(1.01);
+    cursor: pointer;
+}
+.plans-card {
+    width: 18rem;
+}
+.plans-header {
+    text-align: center;
+    position: relative;
+    font-size: 15px;
+    font-family:'Times New Roman', Times, serif
+}
+
+@media (max-width: 768px) {
+    .plans-container {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items:center;
+        justify-content: space-between;
+      }
+      .plans-card {
+        padding-bottom: 1em;
+      }
+    }
