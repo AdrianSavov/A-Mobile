@@ -13,8 +13,10 @@
 }
 .plans-card :hover{
     transform: scale(1.01);
+    transition: all 0.3s ease;
     cursor: pointer;
 }
+
 .plans-card {
     width: 18rem;
 }
