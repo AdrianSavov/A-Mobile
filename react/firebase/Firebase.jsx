@@ -78,4 +78,23 @@ export const getAllSmartphones = async () => {
     }
   };
 
+  export const getOneDevice = async (pathAndId) => {
+    try {
+      const deviceRef = ref(database, pathAndId);
+      const snapshot = await get(deviceRef);
+  
+      if (snapshot.exists()) {
+        // Convert the data to an array
+        const data = Object.entries(snapshot.val());
+        return data;
+      } else {
+        console.log("No data available");
+        return [];
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      throw error;
+    }
+  };
+
 export default app;

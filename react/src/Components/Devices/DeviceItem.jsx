@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import { Modal, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
+import { getOneDevice } from "../../../firebase/Firebase";
+
 import "./DeviceItem.css";
 
 const DeviceItem = ({
@@ -18,13 +20,17 @@ const DeviceItem = ({
   const handleClick = async (event) => {
     const devId = event.currentTarget.id;
     const path = location.pathname;
+    const combined = `${path}/${devId}`
 
-    const response = await fetch(
-      `http://localhost:3030/jsonstore${path}/${devId}`
-    );
-    const data = await response.json();
+    // const response = await fetch(
+    //   `http://localhost:3030/jsonstore${path}/${devId}`
+    // );
+    // const data = await response.json();
 
-    setDeviceDetails(data);
+    getOneDevice(combined)
+      .then((result) => setDeviceDetails(result))
+      .catch((err) => console.log(err));
+
     setShow(true);
   };
 
@@ -54,8 +60,11 @@ const DeviceItem = ({
         <Modal.Body>
           {deviceDetails &&
             Object.entries(deviceDetails).map(([key, value], index) => {
-              if (key !== "imageUrl" && key !== "_id") {
-                return <p key={index}>{`${key}: ${value}`}</p>;
+              if (value[0] !== "imageUrl" && value[0] !== "_id") {
+                console.log(key);
+                console.log(value);
+                console.log(index);
+                return <p key={index}>{`${value[0]}: ${value[1]}`}</p>;
               }
               return null;
             })}
