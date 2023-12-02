@@ -1,22 +1,32 @@
-// AuthContext.js
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const AuthStateContext = createContext();
 const AuthDispatchContext = createContext();
 
 const authReducer = (state, action) => {
   switch (action.type) {
-    case 'LOGIN':
-      return { ...state, isAuthenticated: true, user: action.payload };
+    case 'SET_USER':
+      return { ...state, user: action.payload, isLoading: false };
     case 'LOGOUT':
-      return { ...state, isAuthenticated: false, user: null };
+      return { ...state, user: null, isLoading: false };
     default:
       return state;
   }
 };
 
 export const AuthProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, { isAuthenticated: false, user: null });
+  const [state, dispatch] = useReducer(authReducer, { user: null, isLoading: true });
+
+  const auth = getAuth();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      dispatch({ type: 'SET_USER', payload: user });
+    });
+
+    return () => unsubscribe();
+  }, [auth]);
 
   return (
     <AuthStateContext.Provider value={state}>
