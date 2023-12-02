@@ -6,7 +6,7 @@
   max-width: 95%;
   margin: 0 auto;
   display: flex;
-  flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
+  flex-wrap: wrap; 
 }
 
 .carousel-img {
@@ -20,7 +20,7 @@
   top: 50%;
   left: 50%;
   text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-  transform: translate(0%, 30%); 
+  transform: translate(0%, 23%); 
 }
 
 .carousel {
@@ -29,7 +29,7 @@
 
 .carousel-container-text-p {
   text-align: center;
-  font-size: 4em;
+  font-size: 2.7em;
   padding-top: 1em;
   padding-bottom: 1em;
 }
