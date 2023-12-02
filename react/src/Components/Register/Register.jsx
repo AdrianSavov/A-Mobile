@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useAuthDispatch } from '../../authProvider/Auth';
+import {  useNavigate  } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';  // Import getAuth
 import "./register.css";
 
@@ -8,6 +9,7 @@ const Register = () => {
   const dispatch = useAuthDispatch();
   const [values, setValues] = useState({ email: '', password: '', confirmPassword: '' });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate(); 
   
   // Create the auth object
   const auth = getAuth();
@@ -46,7 +48,8 @@ const Register = () => {
       try {
         const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
         dispatch({ type: 'SET_USER', payload: userCredential.user });
-        // You can redirect the user to another page after successful registration
+        alert('User created successfuly!')
+        navigate('/login')
       } catch (error) {
         console.error('Error creating user:', error);
         // Handle registration error
