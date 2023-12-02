@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -12,15 +12,23 @@ function NavbarItem() {
   const dispatch = useAuthDispatch();
   const navigate = useNavigate(); 
 
+  const [showMessage, setShowMessage] = useState(false);
+
   const handleLogout = () => {
     // Dispatch a logout action to clear the user from the state
     dispatch({ type: 'LOGOUT' });
 
-    alert('You logged out successfuly.')
+    setShowMessage(true)
     navigate('/');
   };
 
   return (
+    <div>
+      {showMessage && (
+        <div className="success-message">
+          You have been successfully logged out.
+        </div>
+      )}
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container className='nav-container'>
         <Navbar.Brand as={Link} to='/'>A-Mobile</Navbar.Brand>
@@ -50,6 +58,7 @@ function NavbarItem() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    </div>
   );
 }
 
