@@ -22,11 +22,6 @@ const DeviceItem = ({
     const path = location.pathname;
     const combined = `${path}/${devId}`
 
-    // const response = await fetch(
-    //   `http://localhost:3030/jsonstore${path}/${devId}`
-    // );
-    // const data = await response.json();
-
     getOneDevice(combined)
       .then((result) => setDeviceDetails(result))
       .catch((err) => console.log(err));
@@ -61,9 +56,6 @@ const DeviceItem = ({
           {deviceDetails &&
             Object.entries(deviceDetails).map(([key, value], index) => {
               if (value[0] !== "imageUrl" && value[0] !== "_id") {
-                console.log(key);
-                console.log(value);
-                console.log(index);
                 return <p key={index}>{`${value[0]}: ${value[1]}`}</p>;
               }
               return null;
