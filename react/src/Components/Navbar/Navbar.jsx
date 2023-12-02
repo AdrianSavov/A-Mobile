@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link, useNavigate  } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
-import { useAuthState, useAuthDispatch } from '../../authProvider/Auth'; // Import useAuthState and useAuthDispatch
+import { useAuthState, useAuthDispatch } from '../../authProvider/Auth'; 
 import './navbarStyle.css';
 
 function NavbarItem() {
@@ -23,12 +23,7 @@ function NavbarItem() {
   };
 
   return (
-    <div>
-      {showMessage && (
-        <div className="success-message">
-          You have been successfully logged out.
-        </div>
-      )}
+   
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container className='nav-container'>
         <Navbar.Brand as={Link} to='/'>A-Mobile</Navbar.Brand>
@@ -58,7 +53,6 @@ function NavbarItem() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    </div>
   );
 }
 
