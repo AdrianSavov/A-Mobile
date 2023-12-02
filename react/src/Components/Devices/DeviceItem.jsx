@@ -23,7 +23,6 @@ const DeviceItem = ({
       `http://localhost:3030/jsonstore${path}/${devId}`
     );
     const data = await response.json();
-    // const result = Object.entries(data);
 
     setDeviceDetails(data);
     setShow(true);

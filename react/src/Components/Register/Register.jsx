@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import "./register.css";
+import { useAuthDispatch } from '../../authProvider/Auth';
 
 const Register = () => {
+  const dispatch = useAuthDispatch();
   const [values, setValues] = useState({ email: '', password: '', confirmPassword: '' });
   const [errors, setErrors] = useState({});
 
@@ -35,6 +37,8 @@ const Register = () => {
     }
 
     setErrors(newErrors);
+
+    dispatch({ type: 'LOGIN', payload: { email: values.email } });
   };
 
   return (

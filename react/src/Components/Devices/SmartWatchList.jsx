@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import * as api from "../../api/api";
+import { getAllSmartwatches } from "../../../firebase/Firebase";
 import DeviceItem from "./DeviceItem"
 
 const WatchList = () => {
   const [devices, setDevices] = useState([]);
 
   useEffect(() => {
-    api
-      .getAllSmartwatches()
+    getAllSmartwatches()
       .then((result) => setDevices(result))
       .catch((err) => console.log(err));
   }, []);
