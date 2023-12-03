@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useAuthDispatch } from '../../authProvider/Auth';
-import {  useNavigate  } from 'react-router-dom';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';  // Import getAuth
+import { useNavigate } from 'react-router-dom';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { setDoc, doc, getFirestore, getDoc } from 'firebase/firestore'; // Import necessary functions from the firestore module
 import "./register.css";
 
 const Register = () => {
   const dispatch = useAuthDispatch();
   const [values, setValues] = useState({ email: '', password: '', confirmPassword: '' });
   const [errors, setErrors] = useState({});
-  const navigate = useNavigate(); 
-  
-  // Create the auth object
+  const navigate = useNavigate();
   const auth = getAuth();
+  const db = getFirestore(); // Initialize Firestore
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
@@ -47,14 +47,59 @@ const Register = () => {
     if (Object.keys(newErrors).length === 0) {
       try {
         const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
+
+        // Set custom claim for the user's role
+        const role = await setFirstUserAsAdmin(userCredential.user.uid);
+
+        // Set user profile information
+        await updateProfile(userCredential.user, { displayName: role });
+
         dispatch({ type: 'SET_USER', payload: userCredential.user });
-        alert('User created successfuly!')
-        navigate('/login')
+        alert('User created successfully!');
+        navigate('/login');
       } catch (error) {
         console.error('Error creating user:', error);
         // Handle registration error
       }
     }
+  };
+
+  // Function to set custom claim for the first user as admin
+  const setFirstUserAsAdmin = async (uid) => {
+    const currentAdminCount = await getAdminCount();
+
+    // Check if this is the first registered user
+    const role = currentAdminCount === 0 ? 'admin' : 'user';
+
+    // Set custom claim for the user's role
+    await setAdminClaim(uid, role);
+
+    // Increment the admin count in Firestore
+    await incrementAdminCount();
+
+    return role;
+  };
+
+  // Function to set custom claim
+  const setAdminClaim = async (uid, role) => {
+    const userDocRef = doc(db, 'users', uid);
+    await setDoc(userDocRef, { role }, { merge: true });
+  };
+
+  // Function to get the current count of admin users
+  const getAdminCount = async () => {
+    // Get the current admin count from Firestore
+    const adminCountRef = doc(db, 'adminCount', 'count');
+    const snapshot = await getDoc(adminCountRef);
+    console.log(snapshot);
+    return snapshot.data()?.count || 0;
+  };
+
+  // Function to increment the admin count in Firestore
+  const incrementAdminCount = async () => {
+    const adminCountRef = doc(db, 'adminCount', 'count');
+    const currentAdminCount = await getAdminCount();
+    await setDoc(adminCountRef, { count: currentAdminCount + 1 });
   };
 
   return (
