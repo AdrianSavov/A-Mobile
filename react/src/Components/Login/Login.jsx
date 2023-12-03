@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useAuthDispatch } from "../../authProvider/Auth";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  signInWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
 
@@ -10,9 +18,20 @@ const Login = () => {
   const [values, setValues] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
-
-  // Create the auth object
   const auth = getAuth();
+
+  useEffect(() => {
+    // Check for authentication state on page load
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch({ type: "SET_USER", payload: user });
+        navigate("/");
+      }
+    });
+
+    // Cleanup function
+    return () => unsubscribe();
+  }, [auth, dispatch, navigate]);
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
@@ -44,13 +63,51 @@ const Login = () => {
           values.email,
           values.password
         );
+
+        // Store authentication token in localStorage
+        localStorage.setItem("authToken", "yourAuthTokenHere");
+
         dispatch({ type: "SET_USER", payload: userCredential.user });
         alert("Login Successfully!");
         navigate("/");
       } catch (error) {
         console.error("Error logging in:", error);
-        alert("Wrong email adress or password. Try again.");
+        alert("Wrong email address or password. Try again.");
       }
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+
+      // Store authentication token in localStorage
+      localStorage.setItem("authToken", "token");
+
+      dispatch({ type: "SET_USER", payload: result.user });
+      alert("Google Login Successfully!");
+      navigate("/");
+    } catch (error) {
+      console.error("Error logging in with Google:", error);
+      alert("Google Login Failed. Try again.");
+    }
+  };
+
+  const handleFacebookLogin = async () => {
+    try {
+      const provider = new FacebookAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+
+      // Store authentication token in localStorage
+      localStorage.setItem("authToken", "yourAuthTokenHere");
+
+      dispatch({ type: "SET_USER", payload: result.user });
+      alert("Facebook Login Successfully!");
+      navigate("/");
+    } catch (error) {
+      console.error("Error logging in with Facebook:", error);
+      alert(`Facebook Login Failed. Error: ${error.message}`);
     }
   };
 
@@ -87,6 +144,17 @@ const Login = () => {
       <div className="btn-container">
         <Button variant="primary" type="submit">
           Login
+        </Button>
+      </div>
+      <div className="or">
+        OR
+      </div>
+      <div className="btn-container-social">
+        <Button className='social-btn-g' variant="outline-danger" onClick={handleGoogleLogin}>
+          Continue with 𝔾oogle
+        </Button>
+        <Button className='social-btn-f' variant="outline-primary" onClick={handleFacebookLogin}>
+          Continue with 𝔽acebook
         </Button>
       </div>
     </Form>

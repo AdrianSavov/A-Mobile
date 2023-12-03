@@ -12,3 +12,33 @@
     padding-top: 2em;
     padding-bottom: 2em;
 }
+.btn-container-social {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+.social-btn-g {
+    width: 100%;
+    background-color: crimson;
+    color: antiquewhite;
+}
+.social-btn-f {
+    width: 100%;
+    margin-top: 1em;
+    background-color: rgb(0, 89, 233);
+    color:antiquewhite ;
+}
+.social-btn-f:hover{
+    background-color:rgb(240, 241, 242);
+    color: black;
+}
+.social-btn-g:hover{
+    background-color:rgb(240, 241, 242);
+    color: black;
+}
+.or {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}

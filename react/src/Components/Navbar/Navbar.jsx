@@ -1,27 +1,32 @@
-import React, {useState} from 'react';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link, useNavigate  } from 'react-router-dom';
+import { Link  } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import { useAuthState, useAuthDispatch } from '../../authProvider/Auth'; 
+import { getAuth, signOut } from 'firebase/auth';
 import './navbarStyle.css';
 
 function NavbarItem() {
   const { user } = useAuthState();
   const dispatch = useAuthDispatch();
-  const navigate = useNavigate(); 
+  const auth = getAuth();
 
-  const [showMessage, setShowMessage] = useState(false);
+  const handleLogout = async () => {
+    try {
+      // Perform logout operation
+      await signOut(auth);
 
-  const handleLogout = () => {
-    // Dispatch a logout action to clear the user from the state
-    dispatch({ type: 'LOGOUT' });
+      // Remove authentication token from localStorage
+      localStorage.removeItem("authToken");
 
-    setShowMessage(true)
-    navigate('/');
+      dispatch({ type: "SET_USER", payload: null });
+      alert("Logout Successful!");
+    } catch (error) {
+      console.error("Error logging out:", error);
+      alert("Logout Failed. Try again.");
+    }
   };
-
   return (
    
     <Navbar expand="lg" className="bg-body-tertiary">
