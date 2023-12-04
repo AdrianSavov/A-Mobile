@@ -22,20 +22,16 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      try {
-        dispatch({ type: 'SET_USER', payload: user });
-      } catch (error) {
-        console.error('Error setting user:', error);
-      }
+      dispatch({ type: 'SET_USER', payload: user, isLoading: false });
     });
-  
+
     return () => unsubscribe();
   }, [auth]);
 
   return (
     <AuthStateContext.Provider value={state}>
       <AuthDispatchContext.Provider value={dispatch}>
-        {children}
+        {!state.isLoading && children}
       </AuthDispatchContext.Provider>
     </AuthStateContext.Provider>
   );
