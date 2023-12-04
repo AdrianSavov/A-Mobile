@@ -1,10 +1,7 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get } from "firebase/database";
 import { getAuth } from 'firebase/auth';
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCUtLcgF1JMOB1HR7q2PlBxB98LRuVEL9E",
   authDomain: "project-defence.firebaseapp.com",
@@ -28,7 +25,6 @@ export const getAllSmartphones = async () => {
       const snapshot = await get(smartphonesRef);
   
       if (snapshot.exists()) {
-        // Convert the data to an array
         const data = Object.values(snapshot.val());
         return data;
       } else {
@@ -43,11 +39,10 @@ export const getAllSmartphones = async () => {
 
   export const getAllCellphones = async () => {
     try {
-      const smartphonesRef = ref(database, 'cellphones');
-      const snapshot = await get(smartphonesRef);
+      const chellphonesRef = ref(database, 'cellphones');
+      const snapshot = await get(chellphonesRef);
   
       if (snapshot.exists()) {
-        // Convert the data to an array
         const data = Object.values(snapshot.val());
         return data;
       } else {
@@ -62,11 +57,10 @@ export const getAllSmartphones = async () => {
 
   export const getAllSmartwatches = async () => {
     try {
-      const smartphonesRef = ref(database, 'smartwatches');
-      const snapshot = await get(smartphonesRef);
+      const smartpwatchesRef = ref(database, 'smartwatches');
+      const snapshot = await get(smartpwatchesRef);
   
       if (snapshot.exists()) {
-        // Convert the data to an array
         const data = Object.values(snapshot.val());
         return data;
       } else {
@@ -85,7 +79,6 @@ export const getAllSmartphones = async () => {
       const snapshot = await get(deviceRef);
   
       if (snapshot.exists()) {
-        // Convert the data to an array
         const data = Object.entries(snapshot.val());
         return data;
       } else {

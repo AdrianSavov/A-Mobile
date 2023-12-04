@@ -22,9 +22,13 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      dispatch({ type: 'SET_USER', payload: user });
+      try {
+        dispatch({ type: 'SET_USER', payload: user });
+      } catch (error) {
+        console.error('Error setting user:', error);
+      }
     });
-
+  
     return () => unsubscribe();
   }, [auth]);
 
