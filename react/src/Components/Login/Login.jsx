@@ -4,7 +4,6 @@ import { useAuthDispatch } from "../../authProvider/Auth";
 import {
   getAuth,
   signInWithEmailAndPassword,
-  signOut,
   onAuthStateChanged,
   signInWithPopup,
   GoogleAuthProvider,
@@ -65,14 +64,13 @@ const Login = () => {
         );
 
         // Store authentication token in localStorage
-        localStorage.setItem("authToken", "yourAuthTokenHere");
+        localStorage.setItem("authToken", userCredential.user.accessToken);
 
         dispatch({ type: "SET_USER", payload: userCredential.user });
-        alert("Login Successfully!");
+
         navigate("/");
       } catch (error) {
         console.error("Error logging in:", error);
-        alert("Wrong email address or password. Try again.");
       }
     }
   };
@@ -83,14 +81,13 @@ const Login = () => {
       const result = await signInWithPopup(auth, provider);
 
       // Store authentication token in localStorage
-      localStorage.setItem("authToken", "token");
+      localStorage.setItem("authToken", userCredential.user.accessToken);
 
       dispatch({ type: "SET_USER", payload: result.user });
-      alert("Google Login Successfully!");
+
       navigate("/");
     } catch (error) {
       console.error("Error logging in with Google:", error);
-      alert("Google Login Failed. Try again.");
     }
   };
 
@@ -100,14 +97,12 @@ const Login = () => {
       const result = await signInWithPopup(auth, provider);
 
       // Store authentication token in localStorage
-      localStorage.setItem("authToken", "yourAuthTokenHere");
+      localStorage.setItem("authToken", userCredential.user.accessToken);
 
       dispatch({ type: "SET_USER", payload: result.user });
-      alert("Facebook Login Successfully!");
       navigate("/");
     } catch (error) {
       console.error("Error logging in with Facebook:", error);
-      alert(`Facebook Login Failed. Error: ${error.message}`);
     }
   };
 

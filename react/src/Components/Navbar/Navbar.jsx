@@ -18,7 +18,7 @@ function NavbarItem() {
       await signOut(auth);
 
       // Remove authentication token from localStorage
-      localStorage.removeItem("authToken");
+      // localStorage.removeItem("authToken");
 
       dispatch({ type: "SET_USER", payload: null });
       alert("Logout Successful!");
