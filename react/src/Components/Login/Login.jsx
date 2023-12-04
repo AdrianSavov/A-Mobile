@@ -9,7 +9,7 @@ import {
   GoogleAuthProvider,
   FacebookAuthProvider,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./login.css";
 
 const Login = () => {
@@ -145,12 +145,18 @@ const Login = () => {
         OR
       </div>
       <div className="btn-container-social">
-        <Button className='social-btn-g' variant="outline-danger" onClick={handleGoogleLogin}>
+        <Button className='google-btn' variant="outline-danger" onClick={handleGoogleLogin}>
           Continue with 𝔾oogle
         </Button>
-        <Button className='social-btn-f' variant="outline-primary" onClick={handleFacebookLogin}>
+        <Button className='facebook-btn' variant="outline-primary" onClick={handleFacebookLogin}>
           Continue with 𝔽acebook
         </Button>
+      </div>
+      <div className="register-text">
+        Don't have an account yet? 
+        <p>
+          <Link to="/register">Register here!</Link>
+          </p>
       </div>
     </Form>
   );
