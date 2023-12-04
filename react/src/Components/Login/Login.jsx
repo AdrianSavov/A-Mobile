@@ -81,7 +81,7 @@ const Login = () => {
       const result = await signInWithPopup(auth, provider);
 
       // Store authentication token in localStorage
-      localStorage.setItem("authToken", userCredential.user.accessToken);
+      localStorage.setItem("authToken", result.user.accessToken);
 
       dispatch({ type: "SET_USER", payload: result.user });
 
@@ -97,7 +97,7 @@ const Login = () => {
       const result = await signInWithPopup(auth, provider);
 
       // Store authentication token in localStorage
-      localStorage.setItem("authToken", userCredential.user.accessToken);
+      localStorage.setItem("authToken", result.user.accessToken);
 
       dispatch({ type: "SET_USER", payload: result.user });
       navigate("/");

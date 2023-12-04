@@ -18,13 +18,11 @@ function NavbarItem() {
       await signOut(auth);
 
       // Remove authentication token from localStorage
-      // localStorage.removeItem("authToken");
+      localStorage.removeItem("authToken");
 
       dispatch({ type: "SET_USER", payload: null });
-      alert("Logout Successful!");
     } catch (error) {
       console.error("Error logging out:", error);
-      alert("Logout Failed. Try again.");
     }
   };
   return (
