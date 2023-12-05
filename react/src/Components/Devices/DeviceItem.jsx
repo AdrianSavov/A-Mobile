@@ -14,7 +14,7 @@ const DeviceItem = ({
   deviceStorage,
   deviceId,
 }) => {
-  const [deviceDetails, setDeviceDetails] = useState([]);
+  const [deviceDetails, setDeviceDetails] = useState({});
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const location = useLocation();
@@ -25,29 +25,29 @@ const DeviceItem = ({
     const path = location.pathname;
     const combined = `${path}/${devId}`;
 
-    getOneDevice(combined)
-      .then((result) => setDeviceDetails(result))
-      .catch((err) => console.log(err));
-
-    setShowDetailsModal(true);
+    try {
+      const result = await getOneDevice(combined);
+      setDeviceDetails(result);
+      setShowDetailsModal(true);
+    } catch (error) {
+      console.error("Error fetching device details:", error);
+    }
   };
 
   const handleCloseDetailsModal = () => setShowDetailsModal(false);
 
   const handleShowEditModal = async () => {
-  // Fetch device details directly using deviceId
-  
-  try {
-    const path = location.pathname;
-    const result = await getOneDevice(`${path}/${deviceId}`);
-    console.log(result);
-    setDeviceDetails(result);
-    handleCloseDetailsModal(); 
-    setShowEditModal(true);
-  } catch (error) {
-    console.error("Error fetching device details:", error);
-  }
-};
+    // Fetch device details directly using deviceId
+    try {
+      const path = location.pathname;
+      const result = await getOneDevice(`${path}/${deviceId}`);
+      setDeviceDetails(Object.fromEntries(result));
+      handleCloseDetailsModal();
+      setShowEditModal(true);
+    } catch (error) {
+      console.error("Error fetching device details:", error);
+    }
+  };
 
   const handleCloseEditModal = () => setShowEditModal(false);
 

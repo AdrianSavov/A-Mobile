@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get } from "firebase/database";
+import { getDatabase, ref, get, update } from "firebase/database";
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -91,4 +91,17 @@ export const getAllSmartphones = async () => {
     }
   };
 
+  export const updateDevice = async (deviceId, path, updatedDetails) => {
+    try {
+      const database = getDatabase(); 
+      const deviceRef = ref(database, `${path}/${deviceId}`); 
+    
+      await update(deviceRef, updatedDetails);
+      console.log('Document successfully updated!');
+    } catch (error) {
+      console.error('Error updating document: ', error);
+      throw error;
+    }
+  };
+  
 export default app;

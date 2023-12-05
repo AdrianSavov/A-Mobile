@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
+import { getOneDevice, updateDevice } from "../../../../firebase/Firebase"; // Assuming you have an updateDevice function
 
 const DeviceEditModal = ({ show, handleClose, deviceDetails }) => {
-  // Convert array to object if deviceDetails is an array
+  const location = useLocation();
+  // State to store edited details
   const [editedDetails, setEditedDetails] = useState(
     Array.isArray(deviceDetails)
-      ? deviceDetails.reduce((acc, cur, index) => {
+      ? deviceDetails.reduce((acc, cur) => {
           acc[cur[0]] = cur[1];
           return acc;
         }, {})
       : { ...deviceDetails }
   );
 
+  // Handler for input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditedDetails((prevDetails) => ({
@@ -20,9 +24,20 @@ const DeviceEditModal = ({ show, handleClose, deviceDetails }) => {
     }));
   };
 
-  const handleSave = () => {
-    // Handle save logic here
-    console.log("Save clicked", editedDetails);
+  // Handler for save button click
+  const handleSave = async () => {
+    try {
+      // Make PUT request to update device details
+      const devId = deviceDetails._id;
+      const path = location.pathname;
+      await updateDevice(devId, path, editedDetails); // Assuming you have a function to update the device details in Firebase
+      console.log("Device details updated successfully");
+    } catch (error) {
+      console.error("Error updating device details:", error);
+    } finally {
+      // Close the modal
+      handleClose();
+    }
   };
 
   // Update editedDetails when deviceDetails changes
