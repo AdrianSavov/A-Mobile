@@ -42,7 +42,11 @@ const DeviceEditModal = ({ show, handleClose, deviceDetails }) => {
 
   // Update editedDetails when deviceDetails changes
   useEffect(() => {
-    setEditedDetails(Array.isArray(deviceDetails) ? Object.fromEntries(deviceDetails) : { ...deviceDetails });
+    setEditedDetails(
+      Array.isArray(deviceDetails)
+        ? Object.fromEntries(deviceDetails)
+        : { ...deviceDetails }
+    );
   }, [deviceDetails]);
 
   return (
@@ -50,16 +54,19 @@ const DeviceEditModal = ({ show, handleClose, deviceDetails }) => {
       <Modal.Header>
         <Modal.Title className="modal-title">Edit Device</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="custom-modal-body">
         {Object.entries(editedDetails).map(([key, value], index) => (
-          <div key={index}>
-            <label>{key}</label>
-            <input
-              type="text"
-              name={key}
-              value={value}
-              onChange={handleChange}
-            />
+          <div className="input-row" key={index}>
+            <div className="label">{key}</div>
+            <div className="input-container">
+              <input
+                type="text"
+                name={key}
+                value={value}
+                onChange={handleChange}
+                className="value-input"
+              />
+            </div>
           </div>
         ))}
       </Modal.Body>

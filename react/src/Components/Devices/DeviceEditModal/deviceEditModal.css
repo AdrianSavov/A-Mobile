@@ -1,3 +1,25 @@
-.modal {
-    max-height: fit-content;
+
+.custom-modal-body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .input-row .label {
+    margin-right: 10px; 
+    font-weight: bold;
+  }
+  
+  .input-row .input-container {
+    flex: 1; 
 }
+  .input-row .value-input {
+    width: 100%; 
+  }
+  
