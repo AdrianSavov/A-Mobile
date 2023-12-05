@@ -10,14 +10,11 @@ import SmartWatchList from './Components/Devices/SmartWatchList';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import Snowflakes from './Snowflakes';
-import { UserProvider } from './Components/Login/UserContext';
 
 function App() {
 
   return (
     <>
-    <UserProvider >
-
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -30,7 +27,6 @@ function App() {
       </Routes>
       <Footer />
       <Snowflakes />
-    </UserProvider>
     </>
   )
 }

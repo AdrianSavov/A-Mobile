@@ -16,7 +16,7 @@ import './login.css';
 
 const Login = () => {
   const dispatch = useAuthDispatch();
-  const { dispatch: userDispatch } = useUser(); // Use the userDispatch from context
+  const { dispatch: userDispatch } = useUser();
   const [values, setValues] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();

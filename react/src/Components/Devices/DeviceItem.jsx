@@ -3,7 +3,8 @@ import Card from "react-bootstrap/Card";
 import { Modal, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { getOneDevice } from "../../../firebase/Firebase";
-import { useAuthState } from "../../authProvider/Auth"; 
+import { useAuthState } from "../../authProvider/Auth";
+import DeviceEditModal from "./DeviceEditModal/DeviceEditModal";
 import "./DeviceItem.css";
 
 const DeviceItem = ({
@@ -14,53 +15,72 @@ const DeviceItem = ({
   deviceId,
 }) => {
   const [deviceDetails, setDeviceDetails] = useState([]);
-  const [show, setShow] = useState(false);
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const location = useLocation();
   const { user } = useAuthState();
 
   const handleClick = async (event) => {
     const devId = event.currentTarget.id;
     const path = location.pathname;
-    const combined = `${path}/${devId}`
+    const combined = `${path}/${devId}`;
 
     getOneDevice(combined)
       .then((result) => setDeviceDetails(result))
       .catch((err) => console.log(err));
 
-    setShow(true);
+    setShowDetailsModal(true);
   };
 
-  const handleClose = () => setShow(false);
+  const handleCloseDetailsModal = () => setShowDetailsModal(false);
+
+  const handleShowEditModal = async () => {
+  // Fetch device details directly using deviceId
+  
+  try {
+    const path = location.pathname;
+    const result = await getOneDevice(`${path}/${deviceId}`);
+    console.log(result);
+    setDeviceDetails(result);
+    handleCloseDetailsModal(); 
+    setShowEditModal(true);
+  } catch (error) {
+    console.error("Error fetching device details:", error);
+  }
+};
+
+  const handleCloseEditModal = () => setShowEditModal(false);
 
   return (
-      <><Card className="my-card" id={deviceId}>
-      <Card.Img src={deviceImg} alt={deviceName} />
-      <div className="middle">
-        <Button variant="primary" id={deviceId} onClick={handleClick}>
-          Details
-        </Button>
-      </div>
-      <Card.Body>
-        <Card.Title>{deviceName}</Card.Title>
-        <Card.Text>
-          Price: {devicePrice}
-        </Card.Text>
-        <Card.Text>
-          Price: {deviceStorage}
-        </Card.Text>
-        {/* Conditionally render buttons for admin */}
-        {user && user.displayName === "admin" && (
+    <>
+      <Card className="my-card" id={deviceId}>
+        <Card.Img src={deviceImg} alt={deviceName} />
+        <div className="middle">
+          <Button variant="primary" id={deviceId} onClick={handleClick}>
+            Details
+          </Button>
+        </div>
+        <Card.Body>
+          <Card.Title>{deviceName}</Card.Title>
+          <Card.Text>Price: {devicePrice}</Card.Text>
+          <Card.Text>Storage: {deviceStorage}</Card.Text>
+          {/* Conditionally render buttons for admin */}
+          {user && user.displayName === "admin" && (
             <div className="additional-btns">
-              <Button variant="secondary" onClick={() => console.log("EDIT clicked")}>
+              <Button variant="secondary" onClick={handleShowEditModal}>
                 EDIT
               </Button>
-              <Button variant="secondary" onClick={() => console.log("DELETE clicked")}>
+              <Button
+                variant="secondary"
+                onClick={() => console.log("DELETE clicked")}
+              >
                 DELETE
               </Button>
             </div>
           )}
-      </Card.Body>
-    </Card><Modal show={show} onHide={handleClose}>
+        </Card.Body>
+      </Card>
+      <Modal show={showDetailsModal} onHide={handleCloseDetailsModal}>
         <Modal.Header>
           <Modal.Title className="modal-title">Device Details</Modal.Title>
         </Modal.Header>
@@ -74,11 +94,17 @@ const DeviceItem = ({
             })}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleCloseDetailsModal}>
             Close
           </Button>
         </Modal.Footer>
-      </Modal></>
+      </Modal>
+      <DeviceEditModal
+        show={showEditModal}
+        handleClose={handleCloseEditModal}
+        deviceDetails={deviceDetails}
+      />
+    </>
   );
 };
 
