@@ -56,7 +56,6 @@
   .card-text {
     text-align: center;
     font-style: italic;
-    /* font-weight: bold; */
   }
   .modal {
     justify-content: center;
@@ -88,7 +87,7 @@
 
 @media (max-width: 768px) {
   .product-card {
-    max-width: 100%; /* Allow cards to take full width on larger screens */
+    max-width: 100%; 
   }
   .product-card {
     width: 95%;

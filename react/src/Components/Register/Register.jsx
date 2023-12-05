@@ -59,7 +59,6 @@ const Register = () => {
         navigate('/login');
       } catch (error) {
         console.error('Error creating user:', error);
-        // Handle registration error
       }
     }
   };

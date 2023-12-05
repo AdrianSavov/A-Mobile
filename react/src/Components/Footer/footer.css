@@ -7,7 +7,7 @@
 }
 
 .social-icons a:hover {
-  color: #007bff; /* Adjust the icon color on hover */
+  color: #007bff;
   transform:scale(1.1);
 }
 .footer-header {

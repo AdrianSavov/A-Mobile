@@ -14,7 +14,6 @@ function NavbarItem() {
 
   const handleLogout = async () => {
     try {
-      // Perform logout operation
       await signOut(auth);
 
       // Remove authentication token from localStorage

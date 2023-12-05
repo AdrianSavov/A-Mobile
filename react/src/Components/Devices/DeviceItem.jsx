@@ -64,7 +64,6 @@ const DeviceItem = ({
           <Card.Title>{deviceName}</Card.Title>
           <Card.Text>Price: {devicePrice}</Card.Text>
           <Card.Text>Storage: {deviceStorage}</Card.Text>
-          {/* Conditionally render buttons for admin */}
           {user && user.displayName === "admin" && (
             <div className="additional-btns">
               <Button variant="secondary" onClick={handleShowEditModal}>

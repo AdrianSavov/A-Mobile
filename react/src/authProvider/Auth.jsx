@@ -1,5 +1,3 @@
-// authProvider/Auth.js
-
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
@@ -33,7 +31,12 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthStateContext.Provider value={state}>
       <AuthDispatchContext.Provider value={dispatch}>
-        {children}
+        {!state.isLoading ? (
+          children
+        ) : (
+          //Render a loading indicator here
+          <div>Loading...</div>
+        )}
       </AuthDispatchContext.Provider>
     </AuthStateContext.Provider>
   );

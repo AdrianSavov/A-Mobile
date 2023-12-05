@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
-import { getOneDevice, updateDevice } from "../../../../firebase/Firebase"; // Assuming you have an updateDevice function
+import { updateDevice } from "../../../../firebase/Firebase"; 
 
 const DeviceEditModal = ({ show, handleClose, deviceDetails }) => {
   const location = useLocation();
@@ -27,15 +27,16 @@ const DeviceEditModal = ({ show, handleClose, deviceDetails }) => {
   // Handler for save button click
   const handleSave = async () => {
     try {
-      // Make PUT request to update device details
+      // PUT request to update device details
       const devId = deviceDetails._id;
       const path = location.pathname;
-      await updateDevice(devId, path, editedDetails); // Assuming you have a function to update the device details in Firebase
+      await updateDevice(devId, path, editedDetails); 
+      
       console.log("Device details updated successfully");
+
     } catch (error) {
       console.error("Error updating device details:", error);
     } finally {
-      // Close the modal
       handleClose();
     }
   };

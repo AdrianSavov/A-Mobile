@@ -73,7 +73,7 @@ const Login = () => {
         // Get the user's role from Firestore
         const userRole = userDoc.data()?.role || 'user';
 
-        // Store user information in global state or wherever you manage user data
+        // Store user information in global state
         userDispatch({
           type: 'SET_USER',
           payload: { ...userCredential.user, role: userRole },
