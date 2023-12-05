@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Button, Form } from "react-bootstrap";
-import { useAuthDispatch } from "../../authProvider/Auth";
+import React, { useState, useEffect } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { useAuthDispatch } from '../../authProvider/Auth';
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -8,13 +8,16 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   FacebookAuthProvider,
-} from "firebase/auth";
-import { useNavigate, Link } from "react-router-dom";
-import "./login.css";
+} from 'firebase/auth';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { useNavigate, Link } from 'react-router-dom';
+import { useUser } from './UserContext'; 
+import './login.css';
 
 const Login = () => {
   const dispatch = useAuthDispatch();
-  const [values, setValues] = useState({ email: "", password: "" });
+  const { dispatch: userDispatch } = useUser(); // Use the userDispatch from context
+  const [values, setValues] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const auth = getAuth();
@@ -23,8 +26,8 @@ const Login = () => {
     // Check for authentication state on page load
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch({ type: "SET_USER", payload: user });
-        navigate("/");
+        dispatch({ type: 'SET_USER', payload: user });
+        navigate('/');
       }
     });
 
@@ -38,19 +41,18 @@ const Login = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-
     const newErrors = {};
 
     // Check for email errors
     if (!values.email) {
-      newErrors.email = "Email is required";
+      newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-      newErrors.email = "Email is invalid";
+      newErrors.email = 'Email is invalid';
     }
 
     // Check for password errors
     if (!values.password) {
-      newErrors.password = "Password is required";
+      newErrors.password = 'Password is required';
     }
 
     setErrors(newErrors);
@@ -63,14 +65,28 @@ const Login = () => {
           values.password
         );
 
+        // Fetch additional user data from Firestore
+        const db = getFirestore();
+        const userDocRef = doc(db, 'users', userCredential.user.uid);
+        const userDoc = await getDoc(userDocRef);
+
+        // Get the user's role from Firestore
+        const userRole = userDoc.data()?.role || 'user';
+
+        // Store user information in global state or wherever you manage user data
+        userDispatch({
+          type: 'SET_USER',
+          payload: { ...userCredential.user, role: userRole },
+        });
+
         // Store authentication token in localStorage
-        localStorage.setItem("authToken", userCredential.user.accessToken);
+        localStorage.setItem('authToken', userCredential.user.accessToken);
 
-        dispatch({ type: "SET_USER", payload: userCredential.user });
+        dispatch({ type: 'SET_USER', payload: userCredential.user });
 
-        navigate("/");
+        navigate('/');
       } catch (error) {
-        console.error("Error logging in:", error);
+        console.error('Error logging in:', error);
       }
     }
   };
@@ -141,22 +157,28 @@ const Login = () => {
           Login
         </Button>
       </div>
-      <div className="or">
-        OR
-      </div>
+      <div className="or">OR</div>
       <div className="btn-container-social">
-        <Button className='google-btn' variant="outline-danger" onClick={handleGoogleLogin}>
+        <Button
+          className="google-btn"
+          variant="outline-danger"
+          onClick={handleGoogleLogin}
+        >
           Continue with 𝔾oogle
         </Button>
-        <Button className='facebook-btn' variant="outline-primary" onClick={handleFacebookLogin}>
+        <Button
+          className="facebook-btn"
+          variant="outline-primary"
+          onClick={handleFacebookLogin}
+        >
           Continue with 𝔽acebook
         </Button>
       </div>
       <div className="register-text">
-        Don't have an account yet? 
+        Don't have an account yet?
         <p>
           <Link to="/register">Register here!</Link>
-          </p>
+        </p>
       </div>
     </Form>
   );

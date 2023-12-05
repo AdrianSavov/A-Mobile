@@ -1,3 +1,5 @@
+// authProvider/Auth.js
+
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
@@ -22,7 +24,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      dispatch({ type: 'SET_USER', payload: user, isLoading: false });
+      dispatch({ type: 'SET_USER', payload: user });
     });
 
     return () => unsubscribe();
@@ -31,7 +33,7 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthStateContext.Provider value={state}>
       <AuthDispatchContext.Provider value={dispatch}>
-        {!state.isLoading && children}
+        {children}
       </AuthDispatchContext.Provider>
     </AuthStateContext.Provider>
   );

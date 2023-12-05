@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import { Modal, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { getOneDevice } from "../../../firebase/Firebase";
-
+import { useAuthState } from "../../authProvider/Auth"; 
 import "./DeviceItem.css";
 
 const DeviceItem = ({
@@ -16,6 +16,7 @@ const DeviceItem = ({
   const [deviceDetails, setDeviceDetails] = useState([]);
   const [show, setShow] = useState(false);
   const location = useLocation();
+  const { user } = useAuthState();
 
   const handleClick = async (event) => {
     const devId = event.currentTarget.id;
@@ -47,6 +48,17 @@ const DeviceItem = ({
         <Card.Text>
           Price: {deviceStorage}
         </Card.Text>
+        {/* Conditionally render buttons for admin */}
+        {user && user.displayName === "admin" && (
+            <div className="additional-btns">
+              <Button variant="secondary" onClick={() => console.log("EDIT clicked")}>
+                EDIT
+              </Button>
+              <Button variant="secondary" onClick={() => console.log("DELETE clicked")}>
+                DELETE
+              </Button>
+            </div>
+          )}
       </Card.Body>
     </Card><Modal show={show} onHide={handleClose}>
         <Modal.Header>

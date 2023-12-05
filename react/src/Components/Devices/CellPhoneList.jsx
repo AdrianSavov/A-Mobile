@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getAllCellphones } from "../../../firebase/Firebase";
 import DeviceItem from "./DeviceItem"
 
-const PhoneList = () => {
+const CellphoneList = () => {
   const [devices, setDevices] = useState([]);
 
   useEffect(() => {
@@ -27,4 +27,4 @@ const PhoneList = () => {
   );
 };
 
-export default PhoneList;
+export default CellphoneList;

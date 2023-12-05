@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useAuthDispatch } from '../../authProvider/Auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { setDoc, doc, getFirestore, getDoc } from 'firebase/firestore'; // Import necessary functions from the firestore module
-import "./register.css";
+import { setDoc, doc, getFirestore, getDoc } from 'firebase/firestore';
+import './register.css';
 
 const Register = () => {
   const dispatch = useAuthDispatch();
@@ -12,7 +12,7 @@ const Register = () => {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const auth = getAuth();
-  const db = getFirestore(); // Initialize Firestore
+  const db = getFirestore();
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
@@ -91,7 +91,6 @@ const Register = () => {
     // Get the current admin count from Firestore
     const adminCountRef = doc(db, 'adminCount', 'count');
     const snapshot = await getDoc(adminCountRef);
-    console.log(snapshot);
     return snapshot.data()?.count || 0;
   };
 
@@ -123,6 +122,9 @@ const Register = () => {
         <Button variant="primary" type="submit">
           Register
         </Button>
+      </div>
+      <div className="login-link">
+        Already have an account? <Link to="/login">Login here!</Link>
       </div>
     </Form>
   );
