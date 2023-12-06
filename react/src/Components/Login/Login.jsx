@@ -131,7 +131,7 @@ const Login = () => {
           name="email"
           value={values.email}
           onChange={handleChange}
-          placeholder="Enter email"
+          placeholder="Enter Email Here"
           isInvalid={errors.email}
         />
         <Form.Control.Feedback type="invalid">
@@ -145,7 +145,7 @@ const Login = () => {
           name="password"
           value={values.password}
           onChange={handleChange}
-          placeholder="Password"
+          placeholder="Enter Password Here"
           isInvalid={errors.password}
         />
         <Form.Control.Feedback type="invalid">

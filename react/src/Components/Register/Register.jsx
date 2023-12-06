@@ -104,17 +104,17 @@ const Register = () => {
     <Form className="reg-form-container" onSubmit={handleRegister}>
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" name="email" value={values.email} onChange={handleChange} placeholder="Enter email" isInvalid={errors.email} />
+        <Form.Control type="email" name="email" value={values.email} onChange={handleChange} placeholder="Enter Email Here" isInvalid={errors.email} />
         <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
       </Form.Group>
       <Form.Group controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
-        <Form.Control type="password" name="password" value={values.password} onChange={handleChange} placeholder="Password" isInvalid={errors.password} />
+        <Form.Control type="password" name="password" value={values.password} onChange={handleChange} placeholder="Enter Password Here" isInvalid={errors.password} />
         <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
       </Form.Group>
       <Form.Group controlId="formBasicPasswordConfirm">
         <Form.Label>Confirm Password</Form.Label>
-        <Form.Control type="password" name="confirmPassword" value={values.confirmPassword} onChange={handleChange} placeholder="Confirm Password" isInvalid={errors.confirmPassword} />
+        <Form.Control type="password" name="confirmPassword" value={values.confirmPassword} onChange={handleChange} placeholder="Confirm Password Here" isInvalid={errors.confirmPassword} />
         <Form.Control.Feedback type="invalid">{errors.confirmPassword}</Form.Control.Feedback>
       </Form.Group>
       <div className='reg-btn-container'>

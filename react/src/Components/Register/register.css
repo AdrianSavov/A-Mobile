@@ -15,4 +15,10 @@
 .login-link {
     text-align: center;
 }
+.form-label {
+    padding-top: 2em;
+    padding-bottom: 2em;
+    display: flex;
+    justify-content: center;
+}
 
