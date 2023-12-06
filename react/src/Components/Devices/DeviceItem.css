@@ -42,10 +42,9 @@
   .my-card:hover {
     opacity: 1;
     transform: scale(1.02);
-    background-color: rgb(130, 144, 144);
-
   }
-  
+
+
   .middle button {
     background-color: #f1f1f1;
     color: black;
@@ -82,7 +81,12 @@
   .modal-footer {
     justify-content: center;
   }
-  
+  .card-title {
+    font-size: 1.35rem; /* Adjust the font size as needed */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 /* Media queries for responsiveness */
 
 @media (max-width: 768px) {

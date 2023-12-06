@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get, update } from "firebase/database";
+import { getDatabase, ref, get, update, push } from "firebase/database";
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -100,6 +100,36 @@ export const getAllSmartphones = async () => {
       console.log('Document successfully updated!');
     } catch (error) {
       console.error('Error updating document: ', error);
+      throw error;
+    }
+  };
+
+  export const createDevice = async (deviceInfo, path) => {
+    try {
+      // Get a reference to the "devices" node in the database
+      const devicesRef = ref(database, path);
+  
+      // Generate a new unique key for the device
+      const newDeviceKey = push(devicesRef).key;
+  
+      // Create the device data object
+      const deviceData = {
+        [newDeviceKey]: {
+          _id: newDeviceKey,
+          name: deviceInfo.name,
+          color: deviceInfo.color,
+          storage: deviceInfo.storage,
+          imageUrl: deviceInfo.imageUrl,
+          price: deviceInfo.price,
+        },
+      };
+  
+      // Update the database with the new device data
+      await update(devicesRef, deviceData);
+  
+      console.log('Device successfully created!');
+    } catch (error) {
+      console.error('Error creating device: ', error);
       throw error;
     }
   };

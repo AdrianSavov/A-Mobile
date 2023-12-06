@@ -104,6 +104,7 @@ const DeviceItem = ({
         deviceDetails={deviceDetails}
       />
     </>
+    
   );
 };
 
