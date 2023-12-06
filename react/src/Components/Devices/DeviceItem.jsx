@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import { Modal, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
-import { getOneDevice } from "../../../firebase/Firebase";
+import { getOneDevice, deleteDevice } from "../../../firebase/Firebase";
 import { useAuthState } from "../../authProvider/Auth";
 import DeviceEditModal from "./DeviceEditModal/DeviceEditModal";
 import "./DeviceItem.css";
@@ -51,6 +51,17 @@ const DeviceItem = ({
 
   const handleCloseEditModal = () => setShowEditModal(false);
 
+  const handleDelete = async () => {
+    try {
+      const path = location.pathname;
+      console.log(path);
+      console.log(deviceId);
+      await deleteDevice(path, deviceId);
+      console.log("Device deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting device:", error);
+    }
+  };
   return (
     <>
       <Card className="my-card" id={deviceId}>
@@ -71,7 +82,7 @@ const DeviceItem = ({
               </Button>
               <Button
                 variant="secondary"
-                onClick={() => console.log("DELETE clicked")}
+                onClick={handleDelete}
               >
                 DELETE
               </Button>

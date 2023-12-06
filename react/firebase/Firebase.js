@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get, update, push } from "firebase/database";
+import { getDatabase, ref, get, update, push, remove } from "firebase/database";
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -130,6 +130,17 @@ export const getAllSmartphones = async () => {
       console.log('Device successfully created!');
     } catch (error) {
       console.error('Error creating device: ', error);
+      throw error;
+    }
+  };
+
+  export const deleteDevice = async (path, deviceId) => {
+    try {
+      const database = getDatabase();
+      const deviceRef = ref(database, `${path}/${deviceId}`);
+      await remove(deviceRef);
+    } catch (error) {
+      console.error("Error deleting device:", error);
       throw error;
     }
   };
