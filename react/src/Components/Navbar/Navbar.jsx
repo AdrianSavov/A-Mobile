@@ -39,6 +39,7 @@ function NavbarItem() {
               <NavDropdown.Item as={Link} to='smartphones'>Smartphones</NavDropdown.Item>
               <NavDropdown.Item as={Link} to='smartwatches'>Smart Watches</NavDropdown.Item>
             </NavDropdown>
+            <Nav.Link as={Link} to="about">About Us</Nav.Link>
           </Nav>
           <Nav>
             {!user ? (
