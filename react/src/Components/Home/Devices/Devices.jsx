@@ -9,8 +9,11 @@ function Devices() {
     navigate(path);
   };
 
+  const backgroundImageStyle = {
+    backgroundImage: 'url("christmas-4.png")',
+  }
   return (
-    <div className='devices-container'>
+    <div className='devices-container' style={backgroundImageStyle}>
       <div className='card-item' onClick={() => handleCardClick('/smartphones')}>
         <Card>
           <Card.Img variant="top" src="media.png" />
