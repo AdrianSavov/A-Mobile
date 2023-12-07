@@ -16,7 +16,7 @@ function CarouselItem() {
             <img
               className="carousel-img"
               text="First slide"
-              src="src/assets/office.jpg"
+              src="office.jpg"
             />
             <Carousel.Caption>
               <h1 className="fade-in">Why to choice us?</h1>
@@ -30,7 +30,7 @@ function CarouselItem() {
             <img
               className="carousel-img"
               text="Second slide"
-              src="src/assets/work-2.png"
+              src="work-2.png"
             />
             <Carousel.Caption>
               <h1 className="fade-in">Why we are better?</h1>
@@ -43,7 +43,7 @@ function CarouselItem() {
             <img
               className="carousel-img"
               text="4 slide"
-              src="src/assets/work-3.png"
+              src="work-3.png"
             />
             <Carousel.Caption>
               <h1 className="fade-in">Excellent network coverage!</h1>

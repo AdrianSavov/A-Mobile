@@ -15,7 +15,7 @@ export default function MobilePlans() {
     <div className="plans-container">
       <div className="plans-card">
         <Card>
-          <Card.Img variant="top" src="src/assets/4g.png" />
+          <Card.Img variant="top" src="4g.png" />
           <Card.Body>
             <Card.Title>A-Smart L</Card.Title>
             <Card.Text>
@@ -33,7 +33,7 @@ export default function MobilePlans() {
       </div>
       <div className="plans-card">
         <Card >
-          <Card.Img variant="top" src="src/assets/4g.png" />
+          <Card.Img variant="top" src="4g.png" />
           <Card.Body>
             <Card.Title>A-Smart XL</Card.Title>
             <Card.Text>
@@ -51,7 +51,7 @@ export default function MobilePlans() {
       </div>
       <div className="plans-card">
         <Card >
-          <Card.Img variant="top" src="src/assets/5gg.png" />
+          <Card.Img variant="top" src="5GG.png" />
           <Card.Body>
             <Card.Title>Unlimited</Card.Title>
             <Card.Text>

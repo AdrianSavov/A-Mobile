@@ -2,7 +2,7 @@
     max-width: 95%;
     display: flex;
     justify-content: space-evenly;
-    background-image: url('src/assets/christmas-4.png');
+    background-image: url('christmas-4.png');
     background-size: cover;
     background-position: center;
     margin: 0 auto;

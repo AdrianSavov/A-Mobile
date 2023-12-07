@@ -13,7 +13,7 @@ function Devices() {
     <div className='devices-container'>
       <div className='card-item' onClick={() => handleCardClick('/smartphones')}>
         <Card>
-          <Card.Img variant="top" src="src/assets/media.png" />
+          <Card.Img variant="top" src="media.png" />
           <Card.Body>
             <Card.Title>Smart Phones</Card.Title>
             <Card.Text>
@@ -25,7 +25,7 @@ function Devices() {
       </div>
       <div className='card-item' onClick={() => handleCardClick('/smartwatches')}>
         <Card>
-          <Card.Img variant="top" src="src/assets/watch-2.png" />
+          <Card.Img variant="top" src="watch-2.png" />
           <Card.Body>
             <Card.Title>Smart Watches</Card.Title>
             <Card.Text>
