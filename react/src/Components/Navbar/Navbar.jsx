@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link  } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import { useAuthState, useAuthDispatch } from '../../authProvider/Auth'; 
 import { getAuth, signOut } from 'firebase/auth';
@@ -11,6 +11,7 @@ function NavbarItem() {
   const { user } = useAuthState();
   const dispatch = useAuthDispatch();
   const auth = getAuth();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
@@ -23,6 +24,7 @@ function NavbarItem() {
     } catch (error) {
       console.error("Error logging out:", error);
     }
+    navigate('/')
   };
   return (
    
