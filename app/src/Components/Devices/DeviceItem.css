@@ -1,11 +1,8 @@
-
   .device-container {
     max-width: 78%; 
     margin: 0 auto;
     padding-bottom: 2em;
     padding-top: 2em;
-    justify-content: space-evenly;
-    
   }
   .my-card {
     display: inline-flex;
@@ -16,7 +13,6 @@
   .my-card img {
     transition: all 0.3s ease;
   }
-  
   
   .middle {
     transition: .5s ease;
@@ -44,7 +40,6 @@
     opacity: 1;
     transform: scale(1.02);
   }
-
 
   .middle button {
     background-color: #f1f1f1;
