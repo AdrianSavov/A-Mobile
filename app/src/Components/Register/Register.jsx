@@ -55,7 +55,7 @@ const Register = () => {
         await updateProfile(userCredential.user, { displayName: role });
 
         dispatch({ type: 'SET_USER', payload: userCredential.user });
-        alert('User created successfully!');
+        alert('User created successfully! Now you can login.');
         navigate('/login');
       } catch (error) {
         console.error('Error creating user:', error);

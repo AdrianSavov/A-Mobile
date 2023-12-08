@@ -27,14 +27,14 @@ const Login = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch({ type: 'SET_USER', payload: user });
-        navigate('/');
       }
     });
-
+    
     // Cleanup function
     return () => unsubscribe();
   }, [auth, dispatch, navigate]);
-
+  
+  navigate('/');
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
   };

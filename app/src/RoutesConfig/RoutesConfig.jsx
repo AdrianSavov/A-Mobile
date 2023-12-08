@@ -21,7 +21,7 @@ const RoutesConfig = () => {
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
       <Route path="about" element={<AboutUs />} />
-      <Route path="/404" element={<NotFound />} />
+      <Route path="404" element={<NotFound />} />
       <Route path="*" element={<Navigate to="/404" />} />
     </Routes>
   );
