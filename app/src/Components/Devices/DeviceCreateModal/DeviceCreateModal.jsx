@@ -1,15 +1,11 @@
-import { useState, useEffect } from "react";
-import { getAllCellphones, createDevice } from "../../../../firebase/Firebase"; // Assuming you have a function for creating a device
-import DeviceItem from "../DeviceItem";
-import { useAuthState } from "../../../authProvider/Auth";
+import { useState } from "react";
+import { createDevice } from "../../../../firebase/Firebase"; // Assuming you have a function for creating a device
 import { Button, Modal, Form } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
-
 
 const CreateDeviceModal = ({ showModal, closeModal }) => {
   const [deviceInfo, setDeviceInfo] = useState({ name: "",  color: "", storage: "", imageUrl: "", price: "" });
   const location = useLocation();
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
