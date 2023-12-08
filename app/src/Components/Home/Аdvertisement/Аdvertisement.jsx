@@ -3,7 +3,7 @@ import './advertisemenet.css';
 
 function Advertisement() {
   return (
-    <div className='adv-container'>
+    <div className='adv-container' >
     <Card className="bg-dark text-white">
       <Card.Img src="apple-adve.jpg" alt="Card image" />
       <Card.ImgOverlay>
