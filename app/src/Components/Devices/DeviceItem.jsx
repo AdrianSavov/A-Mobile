@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 import { getOneDevice, deleteDevice } from "../../../firebase/Firebase";
 import { useAuthState } from "../../authProvider/Auth";
 import DeviceEditModal from "./DeviceEditModal/DeviceEditModal";
-
 import "./DeviceItem.css";
 
 const DeviceItem = ({
@@ -114,9 +113,8 @@ const DeviceItem = ({
         show={showEditModal}
         handleClose={handleCloseEditModal}
         deviceDetails={deviceDetails}
-      />
-    </>
-    
+        />
+        </>
   );
 };
 

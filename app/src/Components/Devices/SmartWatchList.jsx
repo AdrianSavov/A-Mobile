@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { getAllSmartwatches } from "../../../firebase/Firebase";
-import DeviceItem from "./DeviceItem"
+import DeviceItem from "./DeviceItem";
 import { useAuthState } from "../../authProvider/Auth";
-import {Button } from "react-bootstrap";
-import DeviceCreateModal from '../Devices/DeviceCreateModal/DeviceCreateModal';
+import { Button } from "react-bootstrap";
+import DeviceCreateModal from "../Devices/DeviceCreateModal/DeviceCreateModal";
 
 const WatchList = () => {
   const [devices, setDevices] = useState([]);
-  const [showModal, setShowModal] = useState(false); 
+  const [showModal, setShowModal] = useState(false);
   const { user } = useAuthState();
 
   useEffect(() => {
@@ -20,6 +20,7 @@ const WatchList = () => {
   const closeModal = () => setShowModal(false);
 
   return (
+    <>
     <div className="device-container">
       {devices.map((device) => (
         <DeviceItem
@@ -31,15 +32,16 @@ const WatchList = () => {
         deviceStorage={device.storage}
         />
         ))}
-         {user && user.displayName === "admin" && (
+      <DeviceCreateModal showModal={showModal} closeModal={closeModal} />
+    </div>
+    {user && user.displayName === "admin" && (
         <div className="additional-btns">
           <Button variant="primary" onClick={openModal}>
             Create Device
           </Button>
         </div>
       )}
-      <DeviceCreateModal showModal={showModal} closeModal={closeModal} />
-        </div>
+        </>
   );
 };
 
