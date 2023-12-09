@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { updateDevice } from "../../../../firebase/Firebase"; 
+import { reload } from "firebase/auth";
 
 const DeviceEditModal = ({ show, handleClose, deviceDetails }) => {
   const location = useLocation();
