@@ -49,19 +49,33 @@
 
 @media (max-width: 768px) {
   .carousel-container {
-      flex-direction: column; /* Stack items vertically on smaller screens */
+      flex-direction: column;
       align-items: center;
+      max-width: 100%;
+      padding-bottom: 0em;
+
+    }
+    .carousel-img {
+      height: 40vh;
+      border-radius: 0px;
+    }
+    .carousel-caption {
+      top: 20%;
     }
     
     .carousel {
-      max-width: 95%; /* Allow the carousel to take full width on smaller screens */
+      max-width: 100%; 
       margin: 0 auto;
+  }
+  .carousel-container-text-p {
+    text-align: center;
+    font-size: 1.7em;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+  }
+  .carousel-container-text-p-percent {
+    text-align: center;
+    font-size: 4em;
   }
 }
 
-@media (max-width: 500px) {
-  .carousel-container-text-p-percent {
-    text-align: center;
-    font-size: 9em;
-  }
-}

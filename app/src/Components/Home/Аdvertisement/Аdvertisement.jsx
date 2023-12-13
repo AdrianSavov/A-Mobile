@@ -1,16 +1,14 @@
-import Card from 'react-bootstrap/Card';
 import './advertisemenet.css';
 
 function Advertisement() {
+
+  const backgroundImageStyle = {
+    backgroundImage: 'url("apple-adve.jpg")',
+  }
+
   return (
-    <div className='adv-container' >
-    <Card className="bg-dark text-white">
-      <Card.Img src="apple-adve.jpg" alt="Card image" />
-      <Card.ImgOverlay>
-        <Card.Title className='card-title'>Premium Apple Reseller</Card.Title>
-        <Card.Text></Card.Text>
-      </Card.ImgOverlay>
-    </Card>
+    <div className='adv-container' style={backgroundImageStyle}>
+      <h2 className='title'>Premium Apple Reseller</h2>
     </div>
   );
 }

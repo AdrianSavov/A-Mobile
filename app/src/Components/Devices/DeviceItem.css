@@ -88,10 +88,7 @@
 /* Media queries for responsiveness */
 
 @media (max-width: 768px) {
-  .product-card {
+  .my-card {
     max-width: 100%; 
-  }
-  .product-card {
-    width: 95%;
   }
 }

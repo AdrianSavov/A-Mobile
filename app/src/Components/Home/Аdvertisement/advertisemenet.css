@@ -1,16 +1,36 @@
-.card-title {
+.title {
     text-align: center;
-    font-size: 3em;
+    color: antiquewhite;
+    padding-top: 1em;
 }
 .adv-container {
-    max-width: 95%; 
-    margin: 0 auto; 
-    position: relative;
-    padding-bottom: 2em;
+    width: 100%;
+    height: 100vh;
+    max-width: 95%;
+    background-size: cover;
+    background-position: center;
+    margin: 0 auto;
+    border-radius: 7px;
+    margin-bottom: 2em;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
     .card-title {
         font-size: 0.8em;
+    }
+    .adv-container {
+        max-width: 100%;
+        margin-bottom: 2em;
+        padding: 0;
+        background-size: 100% 100%;
+        height: 30vh;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin-bottom: 0em;
+        border-radius: 0px;
+
+    }
+    .title {
+        padding: 0;
     }
 }

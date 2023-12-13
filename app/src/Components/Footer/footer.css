@@ -27,6 +27,11 @@
   font-size: 15px;
   text-align: center;
 }
+@media (max-width: 768px) {
+  .footer-container {
+    max-width: 100%;
+  }
+}
 
 
 
