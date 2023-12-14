@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useAuthDispatch } from '../../authProvider/Auth';
 import { useNavigate, Link } from 'react-router-dom';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
+import { useUser } from "../Login/UserContext";
 import './register.css';
 
 const Register = () => {
-  const dispatch = useAuthDispatch();
   const [values, setValues] = useState({ email: '', password: '', confirmPassword: '' });
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const auth = getAuth();
-  const db = getFirestore();
+  const { dispatch: userDispatch } = useUser();
+
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
@@ -46,15 +47,34 @@ const Register = () => {
 
     if (Object.keys(newErrors).length === 0) {
       try {
-        const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
+        await createUserWithEmailAndPassword(auth, values.email, values.password);
 
-        dispatch({ type: 'SET_USER', payload: userCredential.user });
+        const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
 
-        alert('User created successfully! Now you can login.');
+         // Fetch additional user data from Firestore
+         const db = getFirestore();
+         const userDocRef = doc(db, "users", userCredential.user.uid);
+         const userDoc = await getDoc(userDocRef);
+ 
+         // Get the user's role from Firestore
+         const userRole = userDoc.data()?.role || "user";
+ 
+         // Store user information in global state
+         userDispatch({
+           type: "SET_USER",
+           payload: { ...userCredential.user, role: userRole },
+         });
+ 
+         // Store authentication token in localStorage
+         localStorage.setItem("authToken", userCredential.user.accessToken);
+ 
 
-        navigate('/login');
+        toast.success('User created and logged in successfully!');
+
+        navigate('/');
       } catch (error) {
-        console.error('Error creating user:', error);
+        console.log(error);
+        toast.error('Error creating user:', error);
       }
     }
   };
