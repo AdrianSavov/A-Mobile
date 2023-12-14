@@ -1,10 +1,11 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link, useNavigate  } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
+import { Link, useNavigate  } from 'react-router-dom';
 import { useAuthState, useAuthDispatch } from '../../authProvider/Auth'; 
 import { getAuth, signOut } from 'firebase/auth';
+import { toast } from "react-toastify";
 import './navbarStyle.css';
 
 function NavbarItem() {
@@ -21,8 +22,11 @@ function NavbarItem() {
       localStorage.removeItem("authToken");
 
       dispatch({ type: "SET_USER", payload: null });
+
+      toast.info('Logged out...')
+
     } catch (error) {
-      console.error("Error logging out:", error);
+      toast.error("Error logging out:", error);
     }
     navigate('/')
   };
