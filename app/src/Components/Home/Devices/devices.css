@@ -14,12 +14,13 @@
 .card-item {
     width: 18rem;
     margin: 2em;
+    text-align: center;
 }
 .card-item :hover {
     transform:scale(1.0);
 }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
     .devices-container {
         max-width: 100%;
         flex-direction: column; 

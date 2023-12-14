@@ -4,11 +4,10 @@
     padding-top: 1em;
 }
 .adv-container {
-    width: 100%;
     height: 100vh;
     max-width: 95%;
     background-size: cover;
-    background-position: center;
+    background-position: fit-content;
     margin: 0 auto;
     border-radius: 7px;
     margin-bottom: 2em;
