@@ -17,7 +17,7 @@ const AboutUsPage = () => {
       </div>
       <Container className="py-5">
         <Row>
-          <Col md={6}>
+          <Col >
             <h2>Who We Are</h2>
             <p>
               Welcome to our world of innovation! At A-Mobile, we are
@@ -26,7 +26,7 @@ const AboutUsPage = () => {
               creating a seamless and connected future.
             </p>
             <h2>Milestones</h2>
-            <ul>
+            <ul className="info">
               <li>Established in 2003 year</li>
               <li>Launched our first smart device in 2007 year</li>
               <li>Reached 100,000 satisfied customers in 2011 year</li>
