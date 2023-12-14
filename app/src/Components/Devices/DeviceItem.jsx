@@ -4,7 +4,9 @@ import { Modal, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { getOneDevice, deleteDevice } from "../../../firebase/Firebase";
 import { useAuthState } from "../../authProvider/Auth";
+import { toast } from "react-toastify";
 import DeviceEditModal from "./DeviceEditModal/DeviceEditModal";
+import DeleteModal from "./DeviceDeleteModal/DeleteModal"
 import "./DeviceItem.css";
 
 const DeviceItem = ({
@@ -17,9 +19,15 @@ const DeviceItem = ({
   const [deviceDetails, setDeviceDetails] = useState({});
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const location = useLocation();
   const { user } = useAuthState();
-
+  
+  const handleShowDeleteModal = () => setShowDeleteModal(true);
+  const handleCloseDeleteModal = () => setShowDeleteModal(false);
+  const handleCloseDetailsModal = () => setShowDetailsModal(false);
+  const handleCloseEditModal = () => setShowEditModal(false);
+  
   const handleClick = async (event) => {
     const devId = event.currentTarget.id;
     const path = location.pathname;
@@ -34,7 +42,6 @@ const DeviceItem = ({
     }
   };
 
-  const handleCloseDetailsModal = () => setShowDetailsModal(false);
 
   const handleShowEditModal = async () => {
     // Fetch device details directly using deviceId
@@ -49,15 +56,18 @@ const DeviceItem = ({
     }
   };
 
-  const handleCloseEditModal = () => setShowEditModal(false);
 
   const handleDelete = async () => {
     try {
       const path = location.pathname;
       console.log(path);
       console.log(deviceId);
+
       await deleteDevice(path, deviceId);
-      console.log("Device deleted successfully!");
+
+      setShowDeleteModal(false);
+      
+      toast.success("Device deleted successfully!");
     } catch (error) {
       console.error("Error deleting device:", error);
     }
@@ -82,7 +92,7 @@ const DeviceItem = ({
               </Button>
               <Button
                 variant="secondary"
-                onClick={handleDelete}
+                onClick={handleShowDeleteModal}
               >
                 DELETE
               </Button>
@@ -114,6 +124,11 @@ const DeviceItem = ({
         handleClose={handleCloseEditModal}
         deviceDetails={deviceDetails}
         />
+        <DeleteModal
+        show={showDeleteModal}
+        handleClose={handleCloseDeleteModal}
+        handleDelete={handleDelete}
+      />
         </>
   );
 };
