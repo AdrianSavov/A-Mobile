@@ -1,0 +1,10 @@
+.text-confirmation {
+    font-size: 2em;
+    text-transform:none;
+}
+.modal-title {
+    text-align: center;
+}
+.modal-footer {
+    justify-content: space-evenly;
+}
