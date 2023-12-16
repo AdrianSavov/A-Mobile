@@ -3,6 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { updateDevice } from "../../../../firebase/Firebase"; 
 import { reload } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const DeviceEditModal = ({ show, handleClose, deviceDetails }) => {
   const location = useLocation();
@@ -33,10 +34,10 @@ const DeviceEditModal = ({ show, handleClose, deviceDetails }) => {
       const path = location.pathname;
       await updateDevice(devId, path, editedDetails); 
       
-      console.log("Device details updated successfully");
+      toast.success("Device details updated successfully");
 
     } catch (error) {
-      console.error("Error updating device details:", error);
+      toast.error("Error updating device details:", error);
     } finally {
       handleClose();
     }
