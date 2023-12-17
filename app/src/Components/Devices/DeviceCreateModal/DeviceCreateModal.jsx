@@ -15,15 +15,24 @@ const CreateDeviceModal = ({ showModal, closeModal }) => {
 
   const handleCreateDevice = () => {
     const path = location.pathname;
-    // Validate input fields if needed
-    createDevice(deviceInfo, path)
+
+    if (deviceInfo.name !== '' 
+    && deviceInfo.color !== '' 
+    && deviceInfo.storage !== ''
+    && deviceInfo.imageUrl !== ''
+    && deviceInfo.price !== '') {
+
+      createDevice(deviceInfo, path)
       .then(() => {
         // Close the modal and update the device list
         closeModal();
         toast.success('Device created successfuly!')
         
       })
-      .catch((error) => console.error("Error creating device:", error));
+      .catch((error) => toast.error("Error creating device:", error));
+    } else {
+      toast.error('Please fill all fields!')
+    }
   };
 
   return (
