@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import { getOneDevice, deleteDevice } from "../../../firebase/Firebase";
 import { useAuthState } from "../../authProvider/Auth";
 import { toast } from "react-toastify";
+import { useCart } from "../Navbar/CartContext";
 import DeviceEditModal from "./DeviceEditModal/DeviceEditModal";
 import DeleteModal from "./DeviceDeleteModal/DeleteModal"
 import "./DeviceItem.css";
@@ -22,11 +23,18 @@ const DeviceItem = ({
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const location = useLocation();
   const { user } = useAuthState();
+  const { dispatch: cartDispatch } = useCart();
   
   const handleShowDeleteModal = () => setShowDeleteModal(true);
   const handleCloseDeleteModal = () => setShowDeleteModal(false);
   const handleCloseDetailsModal = () => setShowDetailsModal(false);
   const handleCloseEditModal = () => setShowEditModal(false);
+
+  const addToCart = (deviceId) => {
+    cartDispatch({ type: 'ADD_TO_CART', payload: { id: deviceId, quantity: 1, name:deviceName, price: devicePrice } });
+
+    toast.success('Device added to cart!');
+  };
   
   const handleClick = async (event) => {
     const devId = event.currentTarget.id;
@@ -83,7 +91,7 @@ const DeviceItem = ({
         </div>
         <Card.Body>
           <Card.Title>{deviceName}</Card.Title>
-          <Card.Text>Price: {devicePrice}</Card.Text>
+          <Card.Text>Price: ${devicePrice}</Card.Text>
           <Card.Text>Storage: {deviceStorage}</Card.Text>
           {user && user.displayName === "admin" && (
             <div className="additional-btns">
@@ -95,6 +103,13 @@ const DeviceItem = ({
                 onClick={handleShowDeleteModal}
               >
                 DELETE
+              </Button>
+            </div>
+          )}
+          {user && user.displayName !== "admin" && (
+            <div className="additional-btns">
+              <Button variant="secondary" onClick={() => addToCart(deviceId)}>
+                Add to Cart
               </Button>
             </div>
           )}
