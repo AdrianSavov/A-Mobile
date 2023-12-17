@@ -29,6 +29,11 @@ const cartReducer = (state, action) => {
         ...state,
         items: state.items.filter((item) => item.id !== action.payload.id),
       };
+      case 'PURCHASE_ITEMS':
+      return {
+        ...state,
+        items: []
+      };
     default:
       return state;
   }
