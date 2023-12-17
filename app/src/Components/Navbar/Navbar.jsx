@@ -2,6 +2,7 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Nav from "react-bootstrap/Nav";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthState, useAuthDispatch } from "../../authProvider/Auth";
 import { getAuth, signOut } from "firebase/auth";
@@ -10,6 +11,7 @@ import { useCart } from "./CartContext";
 import "./navbarStyle.css";
 import { BsCart } from "react-icons/bs";
 import { AiOutlineDelete } from "react-icons/ai";
+import PurchaseModal from "../PurchaseModal/PurchaseModal";
 
 function NavbarItem() {
   const { user } = useAuthState();
@@ -18,6 +20,11 @@ function NavbarItem() {
   const navigate = useNavigate();
   const { state: cartState } = useCart();
   const { dispatch: cartDispatch } = useCart();
+  const [showPurchaseModal, setShowPurchaseModal] = useState(false);
+
+  const handlePurchaseClick = () => {
+    setShowPurchaseModal(true);
+  };
 
   const handleRemoveItem = (itemId) => {
     // Dispatch an action to remove the item from the cart
@@ -131,9 +138,13 @@ function NavbarItem() {
                         </NavDropdown.Item>
                       )}
                       <NavDropdown.Divider />
-                      <NavDropdown.Item as={Link} to="/cart">
+                      <NavDropdown.Item onClick={handlePurchaseClick}>
                         Purchase here
                       </NavDropdown.Item>
+                      <PurchaseModal 
+                      show={showPurchaseModal}
+                      onHide={() => setShowPurchaseModal(false)}
+                      />
                     </>
                   )}
                 </NavDropdown>
