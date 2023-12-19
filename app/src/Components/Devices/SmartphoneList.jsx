@@ -21,7 +21,7 @@ const SmartphoneList = () => {
     };
 
     fetchData();
-  }, []);
+  }, [devices]);
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);

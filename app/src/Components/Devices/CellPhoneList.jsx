@@ -14,7 +14,7 @@ const CellphoneList = () => {
     getAllCellphones()
       .then((result) => setDevices(result))
       .catch((err) => console.log(err));
-  }, []);
+  }, [devices]);
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
