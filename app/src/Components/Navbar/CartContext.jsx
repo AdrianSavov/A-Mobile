@@ -6,7 +6,6 @@ const CartContext = createContext();
 const cartReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_TO_CART':
-      // Check if the item already exists in the cart
       const existingItem = state.items.find(item => item.id === action.payload.id);
 
       if (existingItem) {
