@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createDevice } from "../../../../firebase/Firebase"; // Assuming you have a function for creating a device
+import { createDevice } from "../../../../firebase/Firebase";
 import { Button, Modal, Form } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -24,7 +24,6 @@ const CreateDeviceModal = ({ showModal, closeModal }) => {
 
       createDevice(deviceInfo, path)
       .then(() => {
-        // Close the modal and update the device list
         closeModal();
         toast.success('Device created successfuly!')
         

@@ -105,13 +105,10 @@ export const getAllSmartphones = async () => {
 
   export const createDevice = async (deviceInfo, path) => {
     try {
-      // Get a reference to the "devices" node in the database
       const devicesRef = ref(database, path);
 
-      // Generate a new unique key for the device
       const newDeviceKey = push(devicesRef).key;
 
-      // Create the device data object
       const deviceData = {
         [newDeviceKey]: {
           _id: newDeviceKey,
@@ -123,7 +120,6 @@ export const getAllSmartphones = async () => {
         },
       };
 
-      // Update the database with the new device data
       await update(devicesRef, deviceData);
 
       console.log('Device successfully created!');
