@@ -27,7 +27,6 @@ function NavbarItem() {
   };
 
   const handleRemoveItem = (itemId) => {
-    // Dispatch an action to remove the item from the cart
     cartDispatch({ type: "REMOVE_ITEM", payload: { id: itemId } });
     toast.info("You removed the device!");
   };
@@ -36,7 +35,6 @@ function NavbarItem() {
     try {
       await signOut(auth);
 
-      // Remove authentication token from localStorage
       localStorage.removeItem("authToken");
 
       dispatch({ type: "SET_USER", payload: null });
@@ -82,7 +80,6 @@ function NavbarItem() {
           <Nav>
             {user && user.displayName !== "admin" && (
               <>
-                {/* Cart Dropdown */}
                 <NavDropdown
                   title={
                     <div>
@@ -100,7 +97,6 @@ function NavbarItem() {
                     <>
                       {cartState.items.map((item) => (
                         <NavDropdown.Item key={item.id}>
-                          {/* Display information about the added device */}
                           <div>
                             <strong>Device: {item.name}</strong>
                             <p>Price: ${item.price}</p>
@@ -118,7 +114,6 @@ function NavbarItem() {
                           </div>
                         </NavDropdown.Item>
                       ))}
-                      {/* Calculate and display the total price for all items in the cart */}
                       {cartState.items.length > 0 && <NavDropdown.Divider />}
                       {cartState.items.length > 0 && (
                         <NavDropdown.Item>
