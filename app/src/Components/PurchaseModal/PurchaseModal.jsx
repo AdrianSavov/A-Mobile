@@ -15,7 +15,6 @@ const [purchaseInfo, setPurchaseInfo] = useState({ name: "",  phone: "", address
   const handlePurchase = () => {
     try {
       if (!purchaseInfo.name || !purchaseInfo.phone || !purchaseInfo.address || !purchaseInfo.postCode) {
-        // Display an error message
         toast.error("Please fill all fields.");
         return;
       }
@@ -26,7 +25,6 @@ const [purchaseInfo, setPurchaseInfo] = useState({ name: "",  phone: "", address
 
       onHide();
     } catch (error) {
-      // Handle any errors that may occur during the purchase
       toast.error("An error occurred during the purchase. Please try again.");
     }
   };
