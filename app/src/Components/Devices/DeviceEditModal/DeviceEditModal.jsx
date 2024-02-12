@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 
 const DeviceEditModal = ({ show, handleClose, deviceDetails }) => {
   const location = useLocation();
-  // State to store edited details
   const [editedDetails, setEditedDetails] = useState(
     Array.isArray(deviceDetails)
       ? deviceDetails.reduce((acc, cur) => {
@@ -17,7 +16,6 @@ const DeviceEditModal = ({ show, handleClose, deviceDetails }) => {
       : { ...deviceDetails }
   );
 
-  // Handler for input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditedDetails((prevDetails) => ({
@@ -26,10 +24,8 @@ const DeviceEditModal = ({ show, handleClose, deviceDetails }) => {
     }));
   };
 
-  // Handler for save button click
   const handleSave = async () => {
     try {
-      // PUT request to update device details
       const devId = deviceDetails._id;
       const path = location.pathname;
       await updateDevice(devId, path, editedDetails); 
@@ -43,7 +39,6 @@ const DeviceEditModal = ({ show, handleClose, deviceDetails }) => {
     }
   };
 
-  // Update editedDetails when deviceDetails changes
   useEffect(() => {
     setEditedDetails(
       Array.isArray(deviceDetails)

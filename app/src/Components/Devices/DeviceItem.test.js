@@ -24,7 +24,6 @@ test("Renders DeviceItem component", async () => {
   });
 
   await waitFor(() => {
-    // Use more flexible queries to find the text content
     const deviceNameElement = screen.getByText((content, element) => {
       return (
         element.tagName.toLowerCase() === "div" &&

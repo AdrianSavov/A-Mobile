@@ -52,7 +52,6 @@ const DeviceItem = ({
 
 
   const handleShowEditModal = async () => {
-    // Fetch device details directly using deviceId
     try {
       const path = location.pathname;
       const result = await getOneDevice(`${path}/${deviceId}`);
