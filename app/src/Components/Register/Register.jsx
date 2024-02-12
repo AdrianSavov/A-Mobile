@@ -24,21 +24,18 @@ const Register = () => {
 
     const newErrors = {};
 
-    // Check for email errors
     if (!values.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
       newErrors.email = 'Email is invalid';
     }
 
-    // Check for password errors
     if (!values.password) {
       newErrors.password = 'Password is required';
     } else if (values.password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
 
-    // Check for confirm password errors
     if (values.password !== values.confirmPassword) {
       newErrors.confirmPassword = 'Passwords do not match';
     }
@@ -51,21 +48,17 @@ const Register = () => {
 
         const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
 
-         // Fetch additional user data from Firestore
          const db = getFirestore();
          const userDocRef = doc(db, "users", userCredential.user.uid);
          const userDoc = await getDoc(userDocRef);
  
-         // Get the user's role from Firestore
          const userRole = userDoc.data()?.role || "user";
  
-         // Store user information in global state
          userDispatch({
            type: "SET_USER",
            payload: { ...userCredential.user, role: userRole },
          });
  
-         // Store authentication token in localStorage
          localStorage.setItem("authToken", userCredential.user.accessToken);
  
 

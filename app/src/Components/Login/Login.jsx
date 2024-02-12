@@ -26,7 +26,6 @@ const Login = () => {
   useEffect(() => {
     let isMounted = true;
 
-    // Check for authentication state on page load
     const unsubscribe = onAuthStateChanged(auth, (user) => {
        if (isMounted && user) {
         dispatch({ type: "SET_USER", payload: user });
@@ -34,7 +33,6 @@ const Login = () => {
       }
     });
 
-    // Cleanup function
     return () => {
       isMounted = false;
       unsubscribe();
@@ -49,14 +47,12 @@ const Login = () => {
     event.preventDefault();
     const newErrors = {};
 
-    // Check for email errors
     if (!values.email) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
       newErrors.email = "Email is invalid";
     }
 
-    // Check for password errors
     if (!values.password) {
       newErrors.password = "Password is required";
     }
@@ -72,21 +68,17 @@ const Login = () => {
           values.password
         );
 
-        // Fetch additional user data from Firestore
         const db = getFirestore();
         const userDocRef = doc(db, "users", userCredential.user.uid);
         const userDoc = await getDoc(userDocRef);
 
-        // Get the user's role from Firestore
         const userRole = userDoc.data()?.role || "user";
 
-        // Store user information in global state
         userDispatch({
           type: "SET_USER",
           payload: { ...userCredential.user, role: userRole },
         });
 
-        // Store authentication token in localStorage
         localStorage.setItem("authToken", userCredential.user.accessToken);
 
         dispatch({ type: "SET_USER", payload: userCredential.user });
@@ -104,7 +96,6 @@ const Login = () => {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
 
-      // Store authentication token in localStorage
       localStorage.setItem("authToken", result.user.accessToken);
 
       dispatch({ type: "SET_USER", payload: result.user });
@@ -121,7 +112,6 @@ const Login = () => {
       const provider = new FacebookAuthProvider();
       const result = await signInWithPopup(auth, provider);
 
-      // Store authentication token in localStorage
       localStorage.setItem("authToken", result.user.accessToken);
 
       dispatch({ type: "SET_USER", payload: result.user });
