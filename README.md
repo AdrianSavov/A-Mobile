@@ -2,6 +2,10 @@
 
 The application is hosted on Firebase: https://project-defence.web.app
 
+## How it works:
+- **Static pages:** - Home, Mobile Plans, About Us, Login and Register
+- **Dynamic pages:** - Devices. With the help of **GET REQUESTS**, it renders a data from Firebase database.
+
 ## Description
 
 A-Mobile is a web application to manage an online smart devices store.
@@ -50,9 +54,3 @@ Delete button clicked:
 
 Create button clicked:
 ![Create button clicked](<https://github.com/AdrianSavov/A-Mobile/blob/main/app/public/screenshots/create-device-button-clicked.png?raw=true>)
-
-How it works:
-- **Static pages:** - Home, Mobile Plans, About Us, Login and Register
-- **Dynamic pages:** - Devices. With the help of **GET REQUESTS**, it renders a data about smart devices.
-
-
