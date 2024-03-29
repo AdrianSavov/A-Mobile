@@ -18,7 +18,7 @@ A-Mobile is a web application to manage an online smart devices store.
 ## Getting started
 
 To use A-Mobile you may enter either as a guest, registered user or admin user:
- # The guest user - have limited/basic access to the application.
+ ### The guest user - have limited/basic access to the application.
 
 Non registered user basic view:
 
