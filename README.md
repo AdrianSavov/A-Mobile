@@ -19,11 +19,7 @@ A-Mobile is a web application to manage an online smart devices store.
 
 To use A-Mobile you may enter either as a guest, registered user or admin user:
 - **The guest user:** - have limited/basic access to the application.
-<p align="center">
-  <img src="4g.png" width="350" title="hover text">
-  <img src="your_relative_path_here_number_2_large_name" width="350" alt="accessibility text">
-</p>
-
+![Basic View](<screenshots/basic-view.png>)
 ![On Hover](<on hover.png>)
 ![On Details button click](<on details.png>)
 
