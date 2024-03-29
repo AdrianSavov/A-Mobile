@@ -21,11 +21,7 @@ To use A-Mobile you may enter either as a guest, registered user or admin user:
 - **The guest user:** - have limited/basic access to the application.
 
 - **Basic View** -->
-![Basic View](<https://github.com/AdrianSavov/A-Mobile/blob/main/app/public/screenshots/basic-view.png?raw=true>)
-- **On Hover** -->
-![On Hover](<https://github.com/AdrianSavov/A-Mobile/blob/main/app/public/screenshots/on-hover.png?raw=true>)
-- **On Details Click** -->
-![On Details button click](<https://github.com/AdrianSavov/A-Mobile/blob/main/app/public/screenshots/on-details.png?raw=true>)
+![Basic View](<https://github.com/AdrianSavov/A-Mobile/blob/main/app/public/screenshots/non-registered-user-view.png?raw=true>)
 
 - **The regular user:** - have access to shoping cart - purchase devices.
 - **Admin user:** - have rights to do all the **CRUD** operations.
