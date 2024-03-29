@@ -18,7 +18,7 @@ A-Mobile is a web application to manage an online smart devices store.
 ## Getting started
 
 To use A-Mobile you may enter either as a guest, registered user or admin user:
- ### The guest user - have limited/basic access to the application.
+ ### 1. Guest user - have limited/basic access to the application.
 
 Non registered user basic view:
 
@@ -28,7 +28,7 @@ On details button clicked (Details button appears on hover effect):
 
 ![On details button clicked](<https://github.com/AdrianSavov/A-Mobile/blob/main/app/public/screenshots/on-details-button-click.png?raw=true>)
 
-- **The regular user:** - have access to shoping cart and purchase devices via button 'Add to Cart'
+### 2. Regular user - have access to shoping cart and purchase devices via button 'Add to Cart'
 
 Registered user view:
 
@@ -38,7 +38,7 @@ Add to cart button clicked:
 
 ![Add to cart button clicked](<https://github.com/AdrianSavov/A-Mobile/blob/main/app/public/screenshots/add-device-to-cart.png?raw=true>)
 
-- **Admin user:** - have rights to do all the **CRUD** operations.
+### 3. Admin user - have rights to do all the **CRUD** operations.
 Admin credentials for test:
 **User: ado15@abv.bg**
 **Password: 123456**
